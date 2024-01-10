@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -40,13 +41,23 @@ public class Login extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    Button signin;
+    Button signin,logbtn;
 
-    EditText uname,pass;
+    EditText uname,passw;
     TextView forgetpass,regbtn;
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(i);
+            finish();
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +72,12 @@ public class Login extends AppCompatActivity {
         mgoogleSignInClient = GoogleSignIn.getClient(this, gso);
         signin = findViewById(R.id.google);
         uname = findViewById(R.id.username);
-        pass = findViewById(R.id.password);
+        passw = findViewById(R.id.password);
         forgetpass = findViewById(R.id.forget);
         regbtn = findViewById(R.id.regisbtn);
+        logbtn = findViewById(R.id.loginbtn);
+
+
 
 
         regbtn.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +95,45 @@ public class Login extends AppCompatActivity {
             }
         });
 
+
+        logbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = uname.getText().toString();
+                String pass = passw.getText().toString();
+
+                if(TextUtils.isEmpty(email)){
+                    Toast.makeText(Login.this, "Insert Email!!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(pass))
+                {
+                    Toast.makeText(Login.this, "Enter Password!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                mAuth.signInWithEmailAndPassword(email, pass)
+                        .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+
+                                    Intent i = new Intent(Login.this, MainActivity.class);
+                                    startActivity(i);
+                                    finish();
+                                    Toast.makeText(getApplicationContext(),"LoggedIn",Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Toast.makeText(Login.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        });
 
     }
 //
@@ -139,7 +192,7 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "SignInWithCredentials:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(Login.this, Logout.class);
+                            Intent i = new Intent(Login.this, MainActivity.class);
                             startActivity(i);
                             finish();
                             Toast.makeText(Login.this, "Success", Toast.LENGTH_SHORT).show();

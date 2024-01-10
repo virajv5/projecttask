@@ -86,13 +86,12 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="Don't have a account register here!"
-            android:textColor="#FFEB3B"
-            android:id="@+id/regisbtn"
-            android:textSize="40px"
-            android:clickable="true"
+            android:textSize="50px"
+            android:textStyle="bold"
             android:fontFamily="sans-serif"
-            android:layout_marginStart="90dp"
-
+            android:id="@+id/regisbtn"
+            android:clickable="true"
+            android:layout_marginStart="70dp"
             android:layout_below="@+id/loginbtn"
             />
 
@@ -103,7 +102,7 @@
             android:textColor="@color/black"
             android:id="@+id/txt"
             android:layout_marginTop="30dp"
-            android:layout_marginStart="150dp"
+            android:layout_marginStart="110dp"
             android:layout_below="@id/regisbtn"/>
         <Button
             android:layout_width="wrap_content"
@@ -112,6 +111,6 @@
             android:text="Google Login"
             android:id="@+id/google"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="130dp"
+            android:layout_marginStart="120dp"
             android:backgroundTint="#03DAC6"/>
 </RelativeLayout>
