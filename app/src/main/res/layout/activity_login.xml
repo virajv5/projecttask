@@ -22,15 +22,18 @@
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:layout_below="@id/signin"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="#30ffffff"
+        android:drawablePadding="20dp"
+        android:ems="10"
         android:hint="Username"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        android:layout_margin="10dp"
         android:padding="20dp"
-        android:drawablePadding="20dp" />
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/password"
@@ -77,26 +80,38 @@
         android:clickable="true"
         />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:id="@+id/socialicon">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Don't have a account register here!"
+            android:textColor="#FFEB3B"
+            android:id="@+id/regisbtn"
+            android:textSize="40px"
+            android:clickable="true"
+            android:fontFamily="sans-serif"
+            android:layout_marginStart="90dp"
+
+            android:layout_below="@+id/loginbtn"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Or Sign in with Gooogle"
             android:textColor="@color/black"
-            android:id="@+id/txt"/>
+            android:id="@+id/txt"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="150dp"
+            android:layout_below="@id/regisbtn"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt"
             android:text="Google Login"
             android:id="@+id/google"
-            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="130dp"
             android:backgroundTint="#03DAC6"/>
-    </RelativeLayout>
 </RelativeLayout>

@@ -43,7 +43,9 @@ public class Login extends AppCompatActivity {
     Button signin;
 
     EditText uname,pass;
-    TextView forgetpass;
+    TextView forgetpass,regbtn;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,17 @@ public class Login extends AppCompatActivity {
         uname = findViewById(R.id.username);
         pass = findViewById(R.id.password);
         forgetpass = findViewById(R.id.forget);
+        regbtn = findViewById(R.id.regisbtn);
 
+
+        regbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Login.this, Register.class);
+                Toast.makeText(Login.this,"Register Here!",Toast.LENGTH_SHORT).show();
+                startActivity(i);
+            }
+        });
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
