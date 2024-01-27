@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.SuperMarketCheckouter.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.SuperMarketCheckouter.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,22 +21,21 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                >
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_image"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/user_default"
-                    app:civ_border_color="@color/colorPrimary"
-                    app:civ_border_width="1dp" />
+                <ImageView
+                    android:layout_width="108dp"
+                    android:layout_height="108dp"
+                    android:src="@drawable/picpic"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginLeft="150dp"
+                    android:id="@+id/picpic"/>
 
                 <TextView
                     android:id="@+id/welcome_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/profile_image"
+                    android:layout_below="@+id/picpic"
                     android:layout_centerHorizontal="true"
                     android:text="Welcome!"
                     android:textAlignment="center"
@@ -74,7 +61,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/purple_200" />
+                android:background="#3F0A49" />
 
             <ImageView
                 android:id="@+id/scan_img"
@@ -112,7 +99,7 @@
                 android:layout_marginTop="5dp"
                 android:text="1835 coins"
                 android:textAlignment="center"
-                android:textColor="@color/yellow"
+                android:textColor="#FFDD00"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -197,4 +184,4 @@
 
     </RelativeLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

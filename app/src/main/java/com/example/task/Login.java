@@ -33,19 +33,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class Login extends AppCompatActivity {
-
-
     private static final String TAG = "GOOGLEAUTH";
 
+
+    GoogleSignInOptions googleauth;
+    GoogleSignInOptions gso;
     GoogleSignInClient mgoogleSignInClient;
-
     private FirebaseAuth mAuth;
-
-    Button signin,logbtn;
-
+    Button googlebtn,logbtn;
     EditText uname,passw;
     TextView forgetpass,regbtn;
-
 
     @Override
     public void onStart() {
@@ -58,6 +55,7 @@ public class Login extends AppCompatActivity {
             finish();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,33 +63,33 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //configuring Google Sign in with requested email
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mgoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        signin = findViewById(R.id.google);
+        googlebtn = findViewById(R.id.google);
         uname = findViewById(R.id.username);
         passw = findViewById(R.id.password);
         forgetpass = findViewById(R.id.forget);
         regbtn = findViewById(R.id.regisbtn);
         logbtn = findViewById(R.id.loginbtn);
+        googlebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+        });
 
 
 
-
+        // Custom Sign in
         regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Login.this, Register.class);
                 Toast.makeText(Login.this,"Register Here!",Toast.LENGTH_SHORT).show();
                 startActivity(i);
-            }
-        });
-        signin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
             }
         });
 
@@ -112,7 +110,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Enter Password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                // Gets realtime data of Custom Sign in
                 mAuth.signInWithEmailAndPassword(email, pass)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                             @Override
@@ -123,6 +121,7 @@ public class Login extends AppCompatActivity {
                                     Intent i = new Intent(Login.this, MainActivity.class);
                                     startActivity(i);
                                     finish();
+                                    Log.d("On","Message auth");
                                     Toast.makeText(getApplicationContext(),"LoggedIn",Toast.LENGTH_SHORT).show();
 
                                 } else {
@@ -136,16 +135,8 @@ public class Login extends AppCompatActivity {
         });
 
     }
-//
-//    void signIn() {
-//        // initiates google sign in process
-//        mgoogleSignInClient.revokeAccess();
-//        Intent intent = mgoogleSignInClient.getSignInIntent();
-//        startActivityForResult(intent, 1000);
-//    }
-
-
     void signIn() {
+        // Generate pop up everytime of all Google Accounts present in device.
         // Revoke access before initiating google sign in process
         mgoogleSignInClient.revokeAccess().addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
@@ -156,6 +147,15 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+//
+//    void signIn() {
+//        // initiates google sign in process
+//        mgoogleSignInClient.revokeAccess();
+//        Intent intent = mgoogleSignInClient.getSignInIntent();
+//        startActivityForResult(intent, 1000);
+
+//    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
